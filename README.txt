@@ -38,9 +38,11 @@
  */ Kayıtlı veritabanı bağlantısı yapma         -/baglan.php
  */ Javascript fonksiyonları                    -/fonksiyonlar.js
  */ Sql işlemleri                               -/tabloisle.php
- */ tablo ekleme formu                          -/ekletablo.php
- */ Veri ekleme formu                           -/ekletablo.php
- */ tablo listeleme                             -/index.php
+ */ Tablo ekleme formu                          -/ekletablo.php
+ */ Tablo düzenleme formu                       -/ekletablo.php
+ */ Veri ekleme formu                           -/index.php
+ */ Veri düzenleme formu                        -/index.php
+ */ Tablo listeleme                             -/index.php
  */ header, footer ve nav                       -/panel/header.php
     |_                                          -/panel/nav.php
     |_                                          -/panel/footer.php
