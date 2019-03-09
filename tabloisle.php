@@ -105,8 +105,6 @@ if (isset($_POST['veriekle'])) {
 foreach($_POST['sutun_ad'] as $tasarim_yazi) {
  $i++;
   if ($_POST["sutun_sayi"] == $i) {
-    $sonveris = $i;
-    $sonveri = $tasarim_yazi;
     if ($tasarim_yazi == $pri) {
       $array .= " NULL ";
     }else{
