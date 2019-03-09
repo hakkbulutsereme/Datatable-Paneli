@@ -104,7 +104,7 @@ display: block;
          /* foreach ($isle as $key ) {
             echo $key["Field"]."----".$key["Type"]."----".$key["Collation"]."----".$key["Null"]."-----".$key["Key"]."-----".$key["Default"]."-----".$key["Extra"]."----".$key["Privileges"]."<br>";
           }*/
-            echo ' </div></div>';
+            echo ' <div id="json_cevap"></div></div></div>';
 
           } ?>
 
@@ -619,7 +619,9 @@ if( strpos($key["Type"],"(")){
 </optgroup>
 </select>
                   </td>
-                  <td>   <?php if (isset($_GET["tabloduzenle"])) {echo $key["Key"];}else{ ?> <select name="index[]" id="field_0_7" data-index="">
+                  <td>   
+
+                    <?php if (!isset($_GET["tabloduzenle"])) {echo $key["Key"]." ".strtoupper($key["Extra"]);}else{ ?> <select class="table_index" name="index[]" id="field_0_7" data-index="">
           <?php
             if(!empty($key["Key"])){
             echo "<option>".$key["Key"]."</option>"; } ?>

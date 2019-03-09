@@ -130,7 +130,30 @@ $(".ai").val("NONE");
 }
 
 
-
+$( document ).on("change",".table_index",function (){
+var index = $(this).val();
+if (index == "PRIMARY") {index = "PRIMARY KEY"}
+if(index !== "bos"){
+var sutun = $(this).closest("tr").find("button").attr("ad");
+var table = $(this).closest("tr").find("button").attr("table");
+var islem = "ALTER TABLE `"+table+"` ADD "+index+"(`"+sutun+"`)";
+var onay = confirm("Bu işlemi onaylıyor musunuz? > "+islem);}
+if (onay) {
+  $.ajax({
+    url:"tabloisle.php",
+    data:{sutunindex:"ok",islem:islem},
+    type:"POST",
+    dataType:"json",
+    success:function(sc){
+if (sc.ok) {
+$("#json_cevap").html($("#json_cevap").html()+sc.ok);
+}else if(sc.no){
+$("#json_cevap").html($("#json_cevap").html()+sc.no);
+}
+    }
+  })
+}
+})
 
 $( document ).on("change",".default_type",function (){
 

@@ -301,7 +301,21 @@ $i =0 ;
       }
 }
 
+if (isset($_POST["sutunindex"])) {
+  $isle = $_POST["islem"];
+try{
+       $db->exec($isle);
 
+ $array["ok"] = "<br>".$isle;
+
+echo json_encode($array);
+      }catch(PDOException $e)
+      {
+
+ $array["no"] = "<br>".$isle."<br>".$e->getMessage();
+ echo json_encode($array);
+      }
+}
 
 
 
