@@ -725,8 +725,8 @@ echo '<td>
 
 }else if(explode("(",$key["Type"])[0] == "varchar" and explode(")",explode("(",$key["Type"])[1])[0] >= 100){
 echo '<td>   
-                 <textarea type="text" id="' . $ad . '" class="form-control" name="' . $ad . '"  >'. $key["Default"] .$veriisle[$i-1].'</textarea>
-                 <textarea style="display:none;" name="' . $ad . '_ex"  >'. $key["Default"] .$veriisle[$i-1].'</textarea>
+                 <textarea type="text" id="' . $ad . '" class="form-control" name="' . $ad . '"  >'.$veriisle[$i-1].'</textarea>
+                 <textarea style="display:none;" name="' . $ad . '_ex"  >'. $veriisle[$i-1].'</textarea>
                </td>
        ';
 }else if(explode("(",$key["Type"])[0] == "mediumtext"){
@@ -743,8 +743,8 @@ echo '<td>
        ';
 }
 else{echo '<td>   
-                 <input type="text"  size="'.explode(")",explode("(",$key["Type"])[1])[0].'" data-maxlength="'.explode(")",explode("(",$key["Type"])[1])[0].'" id="' . $ad . '"  name="' . $ad . '" value="'. $key["Default"] .$veriisle[$i-1].'" >
-                 <textarea style="display:none;"      name="' . $ad . '" value="'. $key["Default"] .$veriisle[$i-1].'</textarea>
+                 <input type="text"  size="'.explode(")",explode("(",$key["Type"])[1])[0].'" data-maxlength="'.explode(")",explode("(",$key["Type"])[1])[0].'" id="' . $ad . '"  name="' . $ad . '" value="'. $veriisle[$i-1].'" >
+                 <textarea style="display:none;"      name="' . $ad . '" >' .$veriisle[$i-1].'</textarea>
                </td>';
      }
 echo "</tr>";

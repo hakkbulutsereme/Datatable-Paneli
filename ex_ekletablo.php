@@ -106,7 +106,15 @@ echo $key["Field"]."----".$key["Type"]."----".$key["Collation"]."----".$key["Nul
           <div class="box-header with-border">
             <h3 class="box-title">Veritabanı Yönetim</h3>
 
-            <div style="float: right; <?php if(isset($_GET["tabloduzenle"])){ echo 'display: none;'; }?>">
+
+          </div>
+
+
+
+
+
+          <div class="box-body">
+                        <div style="float: right; <?php if(isset($_GET["tabloduzenle"])){ echo 'display: none;'; }?>">
               <form method="get" action="">
                  <div class="col-md-4 form-group">
           
@@ -124,13 +132,6 @@ echo $key["Field"]."----".$key["Type"]."----".$key["Collation"]."----".$key["Nul
 </form>
 
             </div>
-          </div>
-
-
-
-
-
-          <div class="box-body">
 <div class=' form-group'>
     <a href='index.php' class='btn-info btn'><i class="fa fa-arrow-left"></i> Geri</a> </div>
 <form action="<?php if(!isset($sutun_sayi)){echo 'ekletablo.php';}else{ echo 'tabloisle.php';} ?>" method="post">
@@ -140,9 +141,9 @@ echo $key["Field"]."----".$key["Type"]."----".$key["Collation"]."----".$key["Nul
              
                ?><input type="text" class="form-control" name="tablo_yeni_ad" id="tablo_yeni_ad" required="" value="<?php if(isset($tablo_ad)){echo $tablo_ad;} ?>" placeholder="Tablo Adı"><?php } ?>
               <input type="<?php if (isset($_GET['tabloduzenle'])) {echo 'hidden';}else{echo 'text';} ?>" class="form-control" name="tablo_ad" id="ilk_ad" required="" value="<?php if(isset($tablo_ad)){echo $tablo_ad;} ?>" placeholder="Tablo Adı"><button id="yeni_ad_kaydet" style="display: none;" type="button" class="btn btn-warning">Yeniden Adlandır</button><span id="yeni_ad_sc"></span>
-            
+</div>            
             <?php if (isset($_GET["yeni_satir"])) {
-              echo('<br><div class=" form-group">
+              echo('<div class="col-xs-3 form-group">
        <label for="exampleInputEmail1">Sonrasına Ekle</label>
        <select name="sonrasi" class="form-control">
               <option >FIRST</option>');
@@ -153,8 +154,12 @@ echo $key["Field"]."----".$key["Type"]."----".$key["Collation"]."----".$key["Nul
 echo('</select></div>');
             } ?>
             <?php if (isset($_GET["tabloduzenle"])) {
-              echo ' <button type="submit" name="tabloduzenle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Düzenle</button></div>';
-            }elseif(!isset($sutun_sayi)){echo ' <button type="submit" name="yeni_satir" class="btn btn-info "><i class="fa fa-plus"></i> Sutun Kaydet</button></div>';}else{echo '<div class="form-group pull-right"> <button type="submit" name="tabloisle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Kaydet</button></div></div>';} ?>
+              echo ' <div class="col-xs-3 form-group "><button type="submit" name="tabloduzenle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Düzenle</button></div>';
+            }elseif(!isset($sutun_sayi)){
+              echo ' <div class="col-xs-3 form-group "><button type="submit" name="yeni_satir" class="btn btn-info "><i class="fa fa-plus"></i> Sutun Kaydet</button></div>';
+            }else{
+              echo ' <div class="col-xs-3 form-group "> <button type="submit" name="tabloisle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Kaydet</button></div>';
+            } ?>
 
        <?php if(!isset($sutun_sayi)){echo "</form>";} ?>
 

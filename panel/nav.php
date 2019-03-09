@@ -45,8 +45,8 @@ while ($row = mysql_fetch_object($db_list)) {
                   </ul>
                 </div>
 </li>
-      <li><a href="index.php"><i class="fa fa-circle-o text-aqua"></i> <span>Anasayfa</span></a></li>
-      <li><a href="ekletablo.php?sutun_sayi=1&ekletablo=&tablo=&tablo_ad="><i class="fa fa-circle-o text-aqua"></i> <span>Tablo Ekle</span></a></li>
+      <li><a href="./"><i class="fa fa-circle-o text-aqua"></i> <span>Anasayfa</span></a></li>
+      
       
       
 

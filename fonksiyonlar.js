@@ -44,7 +44,7 @@ if (sc.trim() == "ok") {
   var dz = confirm(">"+tb+"< Tablosunu Düzenlemek istediğine Emin misin?");
  "tabloduzenle=ok&tablo="+tb;
   if(dz){
- window.location = "ekletablo.php?tabloduzenle=ok&tablo="+tb;  
+ window.location = "./?tabloduzenle=ok&tablo="+tb;  
 
 }
 }
@@ -57,14 +57,14 @@ $('#ekletablo').on("click",function(){
 
   
           $.ajax({
-    url:'satir.php',
+    url:'satir.js',
     success:function (sc) {
 if (sc) {
 i = 0;
    for(i = 0; i < val; i++){
     i++;
   var html = $('tbody').html();
-     $('tbody').html(html+sc); 
+     $('tbody').html(html+code); 
    }  
 
    var yol =  $('tbody').find('tr input[class=ai]').length;
