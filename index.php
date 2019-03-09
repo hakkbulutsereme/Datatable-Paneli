@@ -646,8 +646,8 @@ if( strpos($key["Type"],"(")){
 <td><input type="checkbox" name="bos[<?php echo $i-1; ?>]" class="bos" value="bos"  <?php if(!empty($key["Null"] =="YES")){echo "checked"; } ?>></td>
 <td>
   <input type="checkbox" class="ai" name="aicrement[<?php echo $i-1; ?>]" value="<?php if (!empty($key["Extra"])) {echo "AUTO_INCREMENT";
-} ?>" <?php if (!empty($key["Extra"])) {echo "checked";
-} ?> ><?php if (!empty($key["Extra"])) {echo "<a class='aiptal' href='javascript:aiptal()'>iptal</a>";
+} ?>" <?php if (!empty($key["Extra"]) and $key["Extra"] == "auto_increment") {echo "checked";
+} ?> ><?php if (!empty($key["Extra"]) and $key["Extra"] == "auto_increment") {echo "<a class='aiptal' href='javascript:aiptal()'>iptal</a>";
 } ?></td>
 
                   
