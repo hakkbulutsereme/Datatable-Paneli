@@ -132,7 +132,7 @@ display: block;
               <form method="get" action="">
                  <div class="col-md-4 form-group">
           
-              <input type="number"  class="form-control" id="sutun_sayi" name="sutun_sayi" value="<?php if(isset($_GET["tabloduzenle"])){ echo $sutun_sayi; }else{echo '1';}?>"  placeholder="Sutun Sayısı">
+              <input type="number"  class="form-control sutun_sayi" name="sutun_sayi" value="<?php if(isset($_GET["tabloduzenle"])){ echo $sutun_sayi; }else{echo '1';}?>"  placeholder="Sutun Sayısı">
 
             </div>   
 
@@ -196,7 +196,7 @@ echo('</select></div>');
                 
               </tr>
             </thead>
-            <tbody>
+            <tbody id="satir-ekle">
 
 
 
