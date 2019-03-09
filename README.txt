@@ -38,8 +38,8 @@
  */ Kayıtlı veritabanı bağlantısı yapma         -/baglan.php
  */ Javascript fonksiyonları                    -/fonksiyonlar.js
  */ Sql işlemleri                               -/tabloisle.php
- */ Tablo ekleme formu                          -/ekletablo.php
- */ Tablo düzenleme formu                       -/ekletablo.php
+ */ Tablo ekleme formu                          -/index.php
+ */ Tablo düzenleme formu                       -/index.php
  */ Veri ekleme formu                           -/index.php
  */ Veri düzenleme formu                        -/index.php
  */ Tablo listeleme                             -/index.php
