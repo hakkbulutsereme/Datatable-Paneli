@@ -53,7 +53,7 @@ if (sc.trim() == "ok") {
 $('#ekletablo').on("click",function(){
     
 
- var val = $('#sutun_sayi').val();
+ var val = $('.sutun_sayi').val();
 
   
           $.ajax({
@@ -63,15 +63,15 @@ if (sc) {
 i = 0;
    for(i = 0; i < val; i++){
     i++;
-  var html = $('tbody').html();
-     $('tbody').html(html+code); 
+  var html = $('#satir-ekle').html();
+     $('#satir-ekle').html(html+code); 
    }  
 
-   var yol =  $('tbody').find('tr input[class=ai]').length;
+   var yol =  $('#satir-ekle').find('tr input[class=ai]').length;
 
    for(i = 0; i < yol; i++){    
-$('tbody').find('.ai').eq(i).attr("name","aicrement["+i+"]");//eq ile numaralandırma.
-$('tbody').find('.column_type').eq(i).attr("name","turu["+i+"]");
+$('#satir-ekle').find('.ai').eq(i).attr("name","aicrement["+i+"]");//eq ile numaralandırma.
+$('#satir-ekle').find('.column_type').eq(i).attr("name","turu["+i+"]");
    
 }
     }else{
@@ -111,7 +111,7 @@ if (sc.trim() == "ok") {
   });
   }
 })
-$(".ai").change(function()
+$( document ).on("change",".ai",function()
  {
 $(".aiptal").hide();
 $(".ai").prop('checked',false);
