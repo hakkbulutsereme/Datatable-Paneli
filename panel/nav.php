@@ -30,12 +30,15 @@
                   <ul class="dropdown-menu" role="menu">
                     
 <?php
-$link = mysql_connect('localhost', 'root', '');
-$db_list = mysql_list_dbs($link);
+$user = 'root';
+$pass = '';
+$server = 'localhost';
 
-while ($row = mysql_fetch_object($db_list)) {
-   $ls = $row->Database;
+$dbh = new PDO( "mysql:host=$server", $user, $pass );
+$dbs = $dbh->query( 'SHOW DATABASES' );
 
+while( ( $ls = $dbs->fetchColumn( 0 ) ) !== false )
+{
      echo '<li><a onclick="vtb('."'".$ls."'".');" href="javascript:(0)"><i class="fa fa-plus"></i>'.$ls." </a></li>";
 }
 ?>
