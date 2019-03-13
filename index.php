@@ -167,13 +167,13 @@ tr td select{
                    }
                    echo('</select></div>');
                  } ?>
-                 <?php if (isset($_GET["tabloduzenle"])) {
-                  echo ' <div class="col-xs-3 form-group "><button type="submit" name="tabloduzenle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Düzenle</button></div>';
-                }elseif(isset($sutun_sayi)){
-                  echo ' <div class="col-xs-3 form-group "><button type="submit" name="yeni_satir" class="btn btn-info "><i class="fa fa-plus"></i> Sutun Kaydet</button></div>';
-                }else{
-                  echo ' <div class="col-xs-3 form-group "> <button type="submit" name="tabloisle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Kaydet</button></div>';
-                } ?>
+                <?php if (isset($_GET["tabloduzenle"])) {
+              echo ' <div class="col-xs-3 form-group "><input type="hidden" class="tabloduzenle" value="1"><button type="submit" name="tabloduzenle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Düzenle</button></div>';
+            }elseif(isset($sutun_sayi)){
+              echo ' <div class="col-xs-3 form-group "><input type="hidden" class="tabloduzenle" value=""><button type="submit" name="yeni_satir" class="btn btn-info "><i class="fa fa-plus"></i> Sutun Kaydet</button></div>';
+            }else{
+              echo ' <div class="col-xs-3 form-group "><input type="hidden" class="tabloduzenle" value=""> <button type="submit" name="tabloisle" class="btn btn-info "><i class="fa fa-plus"></i> Tabloyu Kaydet</button></div>';
+            } ?>
 
                 <?php if(!isset($sutun_sayi)){echo "</form>";} ?>
 
