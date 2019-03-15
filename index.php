@@ -52,61 +52,95 @@ tr td select{
   <!-- Main content -->
 
 
-
+<?php if (isset($_GET["sql_cumlesi"])) {
+              if($_GET["durum"] =="ok"){
+                $sonuc = "<label style='color:white;'>Olumlu</label>";
+                $btn ="";
+                $bg ="info";
+            }else{
+                $sonuc = "<label style='color:red;'>Olumsuz</label>";
+                $btn = '<button type="button" class="btn btn-info" onclick="javascript:history.back(3)">Geri Git</button>';
+                $bg ="warning";
+            }
+            echo '<section class="content" style="min-height:auto;"><div class="info" id="info_box">
+            <div class="alert alert-'.$bg.' alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-info"></i> SQL Komutu! Sonuç: '.$sonuc.'</h4>
+            '.$_GET["sql_cumlesi"].'<br>'.$btn.' <div id="json_cevap"></div>
+            </div>
+            </div></section>';
+        } ?>
 
   <!-- Sql Table sütun ekleme, düzenleme ve silme alanı -->
 
 
-  <?php if (isset($_GET["yeni_satir"]) || isset($_GET["ekletablo"]) || isset($_GET["tabloduzenle"])) {
+ <?php if (isset($_GET["yeni_satir"]) || isset($_GET["ekletablo"]) || isset($_GET["tabloduzenle"])) {
     
    ?>
 
    <section class="content">
 
-    <?php 
+ 
+     <?php 
 
-    if (isset($_GET["ekletablo"])) {
-     
+      if (isset($_GET["ekletablo"])) {
+           
 
-     $tablo_ad = $_GET["tablo_ad"];
-     $sutun_sayi = $_GET["sutun_sayi"];
-   } 
+             $tablo_ad = $_GET["tablo_ad"];
+             $sutun_sayi = $_GET["sutun_sayi"];
+          } 
 
-   if (isset($_GET["yeni_satir"])) {
-     
-     $tablo_ad = $_GET["tablo"];
-     $sutun_sayi = $_GET["sutun_sayi"];
-     $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
-     $vrtb=$db->prepare($sql);
-     $vrtb->execute();
-     $sutun_sayi = $vrtb->rowCount();
-     $Field =  $vrtb->fetchAll(PDO::FETCH_ASSOC);  
-   } 
-
-
-
-   if (isset($_GET["tabloduzenle"])) {
-     
-    $tablo_ad = $_GET["tablo"];
-    $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
-    $vrtb=$db->prepare($sql);
-    $vrtb->execute();
-    $sutun_sayi = $vrtb->rowCount();
-    $isle =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
-    
+       if (isset($_GET["yeni_satir"])) {
+             try{         
+             $tablo_ad = $_GET["tablo"];
+             $sutun_sayi = $_GET["sutun_sayi"];
+             $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
+             $vrtb=$db->prepare($sql);
+             $vrtb->execute();
+             $sutun_sayi = $vrtb->rowCount();
+             $Field =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
+             $sql = "ALTER TABLE ".$tablo_ad." ADD";
+              $sonuc = "<label style='color:white;'>Olumlu</label>";
+                $btn ="";
+                $bg ="info";
+                  }catch (PDOException $e) {
+  
+    header("Location:index.php");
+  }
+          } 
 
 
-    echo '<div class="info" id="info_box">
-    <div class="alert alert-warning alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h4><i class="icon fa fa-info"></i> SQL Komutu!</h4>';
-    echo $sql;
-         /* foreach ($isle as $key ) {
-            echo $key["Field"]."----".$key["Type"]."----".$key["Collation"]."----".$key["Null"]."-----".$key["Key"]."-----".$key["Default"]."-----".$key["Extra"]."----".$key["Privileges"]."<br>";
-          }*/
-          echo ' <div id="json_cevap"></div></div></div>';
 
-        } ?>
+       if (isset($_GET["tabloduzenle"])) {
+           try{
+            $tablo_ad = $_GET["tablo"];
+            $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
+            $vrtb=$db->prepare($sql);
+            $vrtb->execute();
+            $sutun_sayi = $vrtb->rowCount(); 
+            $isle =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
+            $sonuc = "<label style='color:white;'>Olumlu</label>";
+                $btn ="";
+                $bg ="info";
+           }catch (PDOException $e) {
+      $sql =$sql .' hata: '.$e->getMessage();
+       $sonuc = "<label style='color:red;'>Olumsuz</label>";
+                $btn = '<button type="button" class="btn btn-info" onclick="javascript:history.back(3)">Geri Git</button>';
+                $bg ="warning";
+  }
+}
+          
+
+ if (isset($_GET["yeni_satir"]) || isset($_GET["tabloduzenle"])) {
+           echo '<div class="info" id="info_box">
+            <div class="alert alert-'.$bg.' alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-info"></i> SQL Komutu! Sonuç: '.$sonuc.'</h4>
+            '.$sql.'<br>'.$btn.' <div id="json_cevap"></div>
+            </div>
+            </div>';
+}
+           ?>
 
 
 
@@ -686,24 +720,7 @@ tr td select{
       <!-- Sql Table listeleme ilk görünüm -->
 
       <section class="content">
-        <?php if (isset($_GET["sql_cumlesi"])) {
-          if($_GET["durum"] =="ok"){
-            $sonuc = "<label style='color:white;'>Olumlu</label>";
-            $btn ="";
-            $bg ="info";
-          }else{
-            $sonuc = "<label style='color:red;'>Olumsuz</label>";
-            $btn = '<button type="button" class="btn btn-info" onclick="javascript:history.back(3)">Geri Git</button>';
-            $bg ="warning";
-          }
-          echo '<div class="info" id="info_box">
-          <div class="alert alert-'.$bg.' alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-          <h4><i class="icon fa fa-info"></i> SQL Komutu! Sonuç: '.$sonuc.'</h4>
-          '.$_GET["sql_cumlesi"].'<br>'.$btn.' <div id="json_cevap"></div>
-          </div>
-          </div>';
-        } ?>
+
 
         <div class="row">
           <div class="col-md-12">
@@ -787,7 +804,7 @@ tr td select{
                           <input type="hidden" min="1" max="20" name="tablo" value="<?php echo $tablo['Name']; ?>">
                           <button type="submit" class="btn btn-warning" style="padding: 5px" title="Sutun Ekle"  name="yeni_satir" value="sutun ekle"><i class="fa fa-plus-square"></i></button></form></td>
                           <td><?php echo $tablo["Rows"]; ?> <button onclick="emptytable('<?php echo $tablo["Name"]; ?>')" title="Tabloyu Boşalt" class="btn-xs btn btn-danger pull-right"><i class="fa fa-minus-square"></i></button></td>
-                          <td><?php echo $tablo["Data_length"]/1024; ?> kb</td>
+                          <td><?php echo ROUND($tablo["Data_length"]/1024,1); ?> kb</td>
                           <td><?php echo $tablo["Create_time"]; ?></td>
                           <td><button onclick="siltable('<?php echo $tablo["Name"]; ?>')" title="Sil" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> <button title="Düzenle" onclick="duzenle('<?php echo $tablo["Name"]; ?>')" class="btn btn-info"><i class="fa fa-edit"></i></button> <a title="Görüntüle" class="btn btn-warning" href="./?durum=ok&sql_cumlesi=<?php echo 'SELECT * FROM '.$tablo["Name"]; ?>&listeletablo=<?php echo $tablo["Name"]; ?>"><i class="fa fa-external-link"></i></a></td>
 
