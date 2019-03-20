@@ -55,7 +55,8 @@ tr td select{
 
    <section class="content">
 
- <?php $table = new table();
+ <?php 
+      
       $table->get($_GET);
    ?>
 
@@ -149,8 +150,11 @@ if (!isset($_GET["listeletablo"]) AND !isset($_GET["sutun_sayi"]) AND !isset($_G
 </script>
 <script>
   $(function () {
-   $('#example1').DataTable()
-   $('#example2').DataTable({
+   
+   $('table .table').DataTable({
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+      },
     'paging'      : false,
     'lengthChange': false,
     'searching'   : false,

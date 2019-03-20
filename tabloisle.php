@@ -1,9 +1,12 @@
 <?php 
 
-include 'baglan.php';
+//include 'baglan.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
+@ob_start();
+  @session_start();
+  date_default_timezone_set('Europe/Istanbul');
 extract($_POST);
 
 class table{
@@ -11,10 +14,38 @@ class table{
     public $Field;
     public $sutun_sayi;
     public $tablo_ad;
+    private $Database = "";
+    private $User= "";
+    private $Password= "";
+    private $Host ="localhost";
+    public $db;
+  public function __construct($Database,$User,$Password,$Host){
+   //      $db_user   = "root";        // Kullanıcı adı
+   //     $db_pass  = "";            // Veritabanı şifre
+   //     $db_name  = $_SESSION["veritabani"]; // Veritabanı Adı
+   //     $host_name  = "localhost";
+
+  
+  try {
+     if(isset($_SESSION["veritabani"])){ 
+      $get= $_SESSION["veritabani"];
+      $this->db   = new PDO("mysql:host=$Host;dbname=$get", $User, $Password);}else{
+      $this->db   = new PDO("mysql:host=$Host;dbname=$Database", $User, $Password);
+     }
+  } catch (PDOException $e) {
+      echo 'Connection failed: '.$e->getMessage();
+  }
+
+  $this->db->query("SET NAMES utf8");
+  $this->db->query("SET CHARACTER SET utf8");
+  $this->db->query("SET COLLATION_CONNECTION = 'utf8_general_ci'");
+  $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $db =$this->db;
+    }
     
    // public $db = Null;
     public function get($get) {
-    global $db;
+    
 
         if(!empty($get)){
          
@@ -22,7 +53,7 @@ class table{
        $tablo_ad = $_GET["tablo"];
        $this->sutun_sayi = $_GET["sutun_sayi"];
        $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
-       $vrtb=$db->prepare($sql);
+       $vrtb=$this->db->prepare($sql);
        $vrtb->execute();
        $sutun_sayi = $vrtb->rowCount();
        $this->Field  =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
@@ -43,7 +74,7 @@ if (isset($get["tabloduzenle"])) {
   try{
     $tablo_ad = $_GET["tablo"];
     $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
-    $vrtb=$db->prepare($sql);
+    $vrtb=$this->db->prepare($sql);
     $vrtb->execute();
     $this->sutun_sayi = $vrtb->rowCount(); 
     $this->Field =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
@@ -707,7 +738,7 @@ if( strpos($key["Type"],"(")){
   public function insertdata($tablo_ad)
   {global $db;
   $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
-       $vrtb=$db->prepare($sql);
+       $vrtb=$this->db->prepare($sql);
               $vrtb->execute();
              $sutun_sayi = $vrtb->rowCount();
              echo '<div style="display: none;" id="veriekle-container"><form action="tabloisle.php" method="POST">';
@@ -791,16 +822,16 @@ echo "</tr>";
   
   }
   echo '</tbody>
-    </table><button type="submit" name="veriekle" class=" veriekle btn btn-warning pull-right" >Kaydet</button></form></div>';
+    </table><div class="form-group col-md-2"><button type="submit" name="veriekle" class=" veriekle btn btn-warning pull-right">Kaydet</button></div></form></div>';
   }
   }
 public function tableview($listeletablo)
 { global $db;
-echo '<button id="verieklebtn" class="btn-warning btn"><i class="fa fa-plus"></i> Veri Ekle</button>';
+echo '<div class="form-group"><button id="verieklebtn" class="btn-warning btn"><i class="fa fa-plus"></i> Veri Ekle</button></div>';
 $loadNum = "";
 $benzersiz =  "";
 try{
-  $vrtb=$db->prepare('SHOW FULL COLUMNS FROM '.$listeletablo);
+  $vrtb=$this->db->prepare('SHOW FULL COLUMNS FROM '.$listeletablo);
 $vrtb->execute();
 }catch(PDOException $e){
 header("Location:index.php?durum=no&sql_cumlesi=".$e->getMessage());
@@ -817,7 +848,7 @@ $benzersiz = $isle["Field"];
 
 }
 $query = 'select * from '.$listeletablo;
-$veri = $db->prepare($query);
+$veri = $this->db->prepare($query);
 $veri->execute();
 
 if ($veri)
@@ -916,7 +947,7 @@ public function tables($value='')
 
 
               <?php 
-              $vrtb=$db->prepare("SHOW TABLE STATUS");
+              $vrtb=$this->db->prepare("SHOW TABLE STATUS");
               $vrtb->execute();
               $isle =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
               foreach ($isle as $tablo) {
@@ -935,7 +966,7 @@ public function tables($value='')
                   <td><?php echo $tablo["Name"]; ?> </td>
                   <td><?php echo $tablo["Collation"]; ?></td>
                   <td><span><?php  
-   $vrtb = $db->prepare("SHOW FULL COLUMNS FROM  ".$tablo["Name"]); $vrtb->execute(); echo $vrtb->rowCount(); 
+   $vrtb = $this->db->prepare("SHOW FULL COLUMNS FROM  ".$tablo["Name"]); $vrtb->execute(); echo $vrtb->rowCount(); 
                    ?></span> 
                    <form style="float: right;" action="index.php" method="get">
                     <input style="width: 30px" type="number" required=""  name="sutun_sayi">
@@ -956,7 +987,7 @@ public function tables($value='')
 }
 }
 
-
+$table = new table($Database= "veritabani",$User = "root",$Password = "",$Host = "localhost");
 
 
 
@@ -1017,7 +1048,7 @@ $y++;
 if ($kayit == true) {
 
     try{
-       $db->exec($set);
+       $table->db->exec($set);
 
 Header ("Location:index.php?durum=ok&sql_cumlesi=".$set."&listeletablo=".$_POST['tablo_adi']);
 
@@ -1049,7 +1080,7 @@ if (isset($_POST['yeni'])) {
  $yeni = $_POST['yeni'];
  $isle = "UPDATE `".$tablo."` SET `".$sutun."` = '".$yeni."' WHERE `".$tablo."`.`".$benzersiz."` = '".$benzersiz_veri."'";
  try{
-       $db->exec($isle);
+       $table->db->exec($isle);
 
  $array["ok"] = $isle;
 
@@ -1093,7 +1124,7 @@ if ($tasarim_yazi == $pri) {
 }
 $isle =  $sql.$sutun.$value.$array;
   try{
-       $db->exec($isle);
+       $table->db->exec($isle);
 
 Header ("Location:index.php?durum=ok&sql_cumlesi=".$isle."&listeletablo=".$_POST['tablo_adi']);
 
@@ -1116,7 +1147,7 @@ $yeni_ad =$_POST['yeni_ad'];
 $ilk_ad =$_POST['ilk_ad'];
 $isle = "RENAME TABLE `".$veritabani."`.`".$ilk_ad."` TO `".$veritabani."`.`".$yeni_ad."`";
   try{
-       $db->exec($isle);
+       $table->db->exec($isle);
      echo "ok";
 
 
@@ -1253,7 +1284,7 @@ $i =0 ;
 
 
       try{
-       $db->exec($isle);
+       $table->db->exec($isle);
        Header ("Location:index.php?durum=ok&sql_cumlesi=".$isle);
 
 
@@ -1270,7 +1301,7 @@ $i =0 ;
 if (isset($_POST["sutunindex"])) {
   $isle = $_POST["islem"];
 try{
-       $db->exec($isle);
+       $table->db->exec($isle);
 
  $array["ok"] = "<br>".$isle;
 
@@ -1446,7 +1477,7 @@ if (isset($_POST['yeni_satir'])) {
 
 
       try{
-        $db->exec($isle);
+        $table->db->exec($isle);
         Header ("Location:index.php?durum=ok&sql_cumlesi=".$isle);
 
       }catch(PDOException $e)
@@ -1464,7 +1495,7 @@ if (isset($_POST['yeni_satir'])) {
 
 
 if (isset($_POST["tablosil"])) {
-  $sql=$db->prepare("DROP TABLE  ".$_POST["tablo"]);
+  $sql=$table->db->prepare("DROP TABLE  ".$_POST["tablo"]);
 if($sql->execute()){
 echo "ok";
 }else{
@@ -1472,7 +1503,7 @@ echo "no";
 }
 }
 if (isset($_POST["tablobosalt"])) {
-  $sql=$db->prepare("TRUNCATE  ".$_POST["tablo"]);
+  $sql=$table->db->prepare("TRUNCATE  ".$_POST["tablo"]);
 if($sql->execute()){
 echo "ok";
 }else{
@@ -1485,7 +1516,7 @@ if (isset($_POST["satirsil"])) {
 
 $sql = "ALTER TABLE  `".$_POST["tablo"]."` DROP `".$_POST["satir"]."`";
  try{
-$db->exec($sql);
+$table->db->exec($sql);
 echo "ok";
     
 }catch(PDOException $e)
@@ -1498,7 +1529,7 @@ echo "ok";
 
 if (isset($_POST["iceriksil"])) {
 
-$sil=$db ->prepare("DELETE FROM ".$_POST["iceriktable"]." WHERE ".$_POST["icerikbenzersiz"]."=:".$_POST["icerikbenzersiz"]);
+$sil=$table->db ->prepare("DELETE FROM ".$_POST["iceriktable"]." WHERE ".$_POST["icerikbenzersiz"]."=:".$_POST["icerikbenzersiz"]);
   $kontrolet=$sil->execute(array($_POST["icerikbenzersiz"] => $_POST["icerik"]));
   if ($kontrolet) {
     echo  "ok";
@@ -1623,7 +1654,7 @@ $sil=$db ->prepare("DELETE FROM ".$_POST["iceriktable"]." WHERE ".$_POST["icerik
 
 
           try{
-            $db->exec($isle);
+            $table->db->exec($isle);
             Header ("Location:index.php?durum=ok&sql_cumlesi=".$isle);
 
 
@@ -1651,14 +1682,14 @@ $tablo_ad = $_POST["iceriktable"];
 $icerikbenzersiz = $_POST["icerikbenzersiz"];
 $icerik = $_POST["icerik"];
 
-$veri=$db->prepare("SELECT * FROM ".$tablo_ad." WHERE ".$icerikbenzersiz." =?");
+$veri=$table->db->prepare("SELECT * FROM ".$tablo_ad." WHERE ".$icerikbenzersiz." =?");
 $veri->execute(array($icerik));
 $veri_sayi = $veri->rowCount();
 $veriisle =  $veri->fetch(PDO::FETCH_NUM);
 
 
 $sql = "SHOW FULL COLUMNS FROM  ".$tablo_ad ;
-$vrtb=$db->prepare($sql);
+$vrtb=$table->db->prepare($sql);
 $vrtb->execute();
 $sutun_sayi = $vrtb->rowCount();
 $isle =  $vrtb->fetchAll(PDO::FETCH_ASSOC);
@@ -1731,4 +1762,4 @@ echo "</tr>";
     </table><div class="form-group"><button type="submit" name="veriduzenle" class=" btn btn-warning " >Güncelle</button></div></form>';
   }
 
- } 
+ } ?>
