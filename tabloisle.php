@@ -1,12 +1,10 @@
 <?php 
 
-//include 'baglan.php';
+include 'baglan.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
-@ob_start();
-  @session_start();
-  date_default_timezone_set('Europe/Istanbul');
+
 extract($_POST);
 
 class table{
@@ -844,6 +842,8 @@ if ($sutun_sayi>0){
 $duzenle = "ok";
 $loadNum = "loadNum";
 $benzersiz = $isle["Field"];
+$sira = $isle[0];
+
 }
 
 }
@@ -854,13 +854,15 @@ $veri->execute();
 if ($veri)
 {
   $i = 0;
+  $prik = 0;
   $uye = new \stdClass();
+  $prikey = new \stdClass();
   while ($i < $veri->columnCount())
   {
      $meta = $veri->getColumnMeta($i);
      
     echo '<th sutun="' . $meta['name'] . '">' . $meta['name'] . '</th>';
-      if (isset($benzersiz) == $meta['name']) {
+      if ($benzersiz == $meta['name']) {
       $sutun = $i;
     }
    // $sutunno = array($i=>$meta['name']);
@@ -871,17 +873,21 @@ if ($veri)
   }
   echo '</tr></thead> <tbody>';
   $icerik ="";
-  $i = 0;
+  
+
+$i = 0;
   while ($row = $veri->fetch(PDO::FETCH_ASSOC)) 
   {
     echo '<tr>';
-    $count = $veri->columnCount();
-    $counts = $veri->rowCount();
+   $count = $veri->columnCount();
+   $counts = $veri->rowCount();
+
+
     $y = 0;
     while ($y < $count)
     {
 
-        $icerik =  current($row);
+     $icerik =  $row[$benzersiz];   
      $sutunno = $uye->$y;
       
       if ($y == 0) {
@@ -987,7 +993,7 @@ public function tables($value='')
 }
 }
 
-$table = new table($Database= "veritabani",$User = "root",$Password = "",$Host = "localhost");
+$table = new table($db_name,$db_user,$db_pass,$host_name);
 
 
 

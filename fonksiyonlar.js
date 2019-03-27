@@ -320,7 +320,7 @@ function htmlspecialchars(str) {
 }
 
   var silicerik = function (argument) {
-var onay = confirm($(this).attr("data-field")+" Silmek İstediğine Emin misin?");
+var onay = confirm($(this).attr("data-field")+":"+$(this).attr("icerik")+" Silmek İstediğine Emin misin?");
 if (onay) {
          $(this).closest("tr").remove(); 
 
