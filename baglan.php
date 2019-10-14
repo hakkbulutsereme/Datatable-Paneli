@@ -8,14 +8,19 @@ if (isset($_GET["vtb"])) {
 	header("Location:index.php");
 }
 if (!isset($_SESSION["veritabani"])) {
-$link = mysql_connect('localhost', 'root', '');
-$db_list = mysql_list_dbs($link);
 
-while ($row = mysql_fetch_object($db_list)) {
-   $_SESSION["veritabani"] = $row->Database;
-  
+$user = 'root';
+$pass = '';
+$server = 'localhost';
 
+$dbh = new PDO( "mysql:host=$server", $user, $pass );
+$dbs = $dbh->query( 'SHOW DATABASES' );
+
+while( ( $db = $dbs->fetchColumn( 0 ) ) !== false )
+{
+     $_SESSION["veritabani"] = $db;
 }
+
 }
 
 	
