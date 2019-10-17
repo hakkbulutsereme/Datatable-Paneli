@@ -28,7 +28,7 @@ class table{
      if(isset($_SESSION["veritabani"])){ 
       $get= $_SESSION["veritabani"];
       $this->db   = new PDO("mysql:host=$Host;dbname=$get", $User, $Password);}else{
-      $this->db   = new PDO("mysql:host=$Host;dbname=$Database", $User, $Password);
+      $this->db   = new PDO("mysql:host=$this->Host;dbname=$this->Database", $this->User, $this->Password);
      }
   } catch (PDOException $e) {
       echo 'Connection failed: '.$e->getMessage();
