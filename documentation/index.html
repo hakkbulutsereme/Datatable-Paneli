@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free bootstrap documentation template">
+    <title>MYSQL Veritabani Yönetim Paneli - Klavuz</title>
+    <!-- using online links -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- using local links -->
+    <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sidebar-themes.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" /> </head>
+
+    <body>
+        <div class="page-wrapper toggled light-theme">
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                    <!-- sidebar-brand  -->
+                    <div class="sidebar-item sidebar-brand text-white font-weight-bold">Documentation</div>
+                    <!-- sidebar-header  -->
+                    <!-- sidebar-search  -->
+
+                    <!-- sidebar-menu  -->
+                    <div class=" sidebar-item sidebar-menu">
+                        <ul>
+                            <li class="header-menu"> <span>Liste</span> </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#"> <i class="fa fa-shopping-cart"></i> <span class="menu-text">Giriş</span> <span class="badge badge-pill badge-primary">3</span> </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li> <a href="#amaci">Kullanım Amacı
+
+                                        </a> </li>
+                                        <li> <a href="#yer">Kullanım Yerleri</a> </li>
+                                        <li> <a href="#gelistirme">Geliştirme Süreci</a> </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#dosyalar"> <i class="fa fa-book"></i> <span class="menu-text">Dosyalar</span> </a>
+                            </li>
+                            <li>
+                                <a href="#kurulum"> <i class="fa fa-calendar"></i> <span class="menu-text">Kurulum</span> </a>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                    <!-- sidebar-menu  -->
+                </div>
+                <!-- sidebar-footer  -->
+
+            </nav>
+            <!-- page-content  -->
+            <main class="page-content">
+                <div id="overlay" class="overlay"></div>
+                <div class="container-fluid">
+                    <div class="row d-flex align-items-center p-3 border-bottom">
+                        <div class="col-md-1">
+                            <a id="toggle-sidebar" class="btn rounded-0 p-3" href="#"> <i class="fas fa-bars"></i> </a>
+                        </div>
+                        <div class="col-md-8">
+                            <nav aria-label="breadcrumb" class="align-items-center">
+                                <a href="index.html" class="breadcrumb-back" title="Back"></a>
+                                <ol class="breadcrumb d-none d-lg-inline-flex m-0">
+                                    <li class="breadcrumb-item"><a href="index.html">Anasayfa</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Layout 2</li>
+                                </ol>
+                            </nav>
+                        </div>
+
+                    </div>
+                    <div class="row p-lg-4">
+                        <article class="main-content col-md-9 pr-lg-5">
+                            <!-- title -Add bootstrap helpers for spacing -->
+                            <h1 id="amaci" class="mb-2 mt-3">Kullanım Amacı</h1>
+                            <!--//title -->
+                            <p class="lead mb-3">MYSQL Veritabanı Yönetim Paneli </p>
+                            <p>Bu proje <a href="https://www.bulutasarim.com" target="_blank">bulutasarim.com</a> adı paylaşılıp kullanıma sunulmuştur. Daha fazla bilgi için lütfen sayfayı ziyaret edin.</p>
+                            <p>Bu proje ile gerek host gerekse local de her türlü küçük sql işlemleri kısa sürede yapabilirsiniz. Hali hazırda kayıtlı bir veritabanı kaydınız varsa bağlantı bilgilerini girerek erişimi sağlayabilir, iki dosyayı (php,js) sayafanıza ekleyerek kurulum dosyasını tamamlarsınız.</p>
+                            <p>Phpmyadmin mysql yöneticisinin mini versiyonudur. Asıl uygulamadan farkı bunu Web sitenizde direk kullanabiliyor olmanız. Tablo yönetimi, Tablo silme ve girdileri düzenleme işlemi yapabilir anlık güncellemeler yapabilirisiniz. Phpmyadmin ile gelen yavaşlık ve karmaşıklığı bu script ile giderebilir, kendi uygulamalarınızı geliştirebilirisiniz.</p>
+                            <p>Script'de bulunan temel özellikler;</p>
+                            <ol>
+                                <li>Tablo görüntüleme</li>
+                                <li>Tablo listeleme</li>
+                                <li>Tablo silme</li>
+                                <li>Tablo düzenleme</li>
+                                <li>Tablo ekleme</li>
+                                <li>Tabloda yeni sütun ekleme</li>
+                                <li>Tabloda sütun silme</li>
+                                <li>Tabloda sütun düzenleme</li>
+                                <li>Tabloda satırları listeleme</li>
+                                <li>Tabloda satır ekleme</li>
+                                <li>Tabloda satırları düzenleme</li>
+                                <li>Tabloda satır/ları silme</li>
+                                <li>Veritabanı listeleme (opsiyonel)</li>
+                                <li>Veritabanı işlemlerini sql olarak açıklama(opsiyonel)</li>
+
+                            </ol>
+                            <!-- Sep -->
+                            <hr class="my-5">
+                            <!-- alert -->
+                            <div class="alert alert-primary d-flex justify-content-start align-items-center" role="alert"> <span class="fa fa-info mr-4"></span>
+                                <p class="m-0"> Optiyonel olarak belirtilen alanlar script dışında kullanım amacına göre eklenebilir. </p>
+                            </div>
+                            <!-- heading -->
+                            <h3 id="yer" class="font-weight-bold mb-2">
+                                Kullanım yerleri
+                            </h3>
+                            <p> Script'de Boostrap ve Font Awesome desteği vardır. </p>
+                            <p> Kullanılabilir alanlar; </p>
+                            <ol>
+                                <li>Blog</li>
+                                <li>Fotograf Blog</li>
+                                <li>Özgeçmiş sayfaları</li>
+                                <li>Dökümantasyon sayfaları</li>
+                                <li>Php Geliştirme sayfaları</li>
+
+
+                            </ol>
+                            <!-- Sep -->
+                            <hr class="my-5">
+                            <h3 id="gelistirme" class="font-weight-bold mb-2">
+                                Geliştirme Süreci
+                            </h3>
+                            <p>Proje kendi işlerimde oluşturma amacı güdülerek oluşturulmuştur. Temel araştırma Aralık 2018 yılında, çalışabilir bir demosu Ocak 2019 oluşmuştur.</p>
+                            <p>İlk çalışan sürümünde tablo listeleme işlemi ile başlayıp son sürümünde temel özelliklere sahip olmuştur.</p>
+                            <p>Geliştirme ve hata düzeltmeleri github üzerinde sürekli yapılacaktır.</p>
+                            <p>Bu proje şuan kullanımdadır, yani sürekli geliştirme aşamasında.</p>
+                            <p>Kaynaklar;</p>
+
+
+                            <ol>
+                                <li>https://dev.mysql.com</li>
+                                <li>https://www.php.net</li>
+                                <li>https://www.w3schools.com</li>
+                                <li>https://stackoverflow.com</li>
+
+
+
+                            </ol>
+
+
+                            <hr class="my-5">
+                            <h3 id="dosyalar" class="font-weight-bold mb-2">
+                                Dosyalar
+                            </h3>
+                            <p>Paylaşılar github dosyasında bu scriptin çalışmasında kullanılacak bütün yardımcı dosyalar bulunmaktadır.</p>
+                            <p>Farklı bir sayfada kullanmak istiğiniz takdirde bu iki dosyayı bulundurduğunuza emin olun;
+                            </p>
+                            <ol>
+                                <li>tabloisle.php</li>
+                                <li>fonksiyonlar.js</li>
+                            </ol>
+
+                            <p><b>tabloisle.php:</b> Dahil etmek istediğiniz panelinizin php sayfasında kod bölümünün en üst kısma <code class=" language-markup"><pre> <strong>&lt;?</strong><b>php</b> include "tabloisle.php";<STRONG> ?></STRONG> </pre></code> yöntemiyle ekleyin.</p>
+                            <p><b>fonksiyonlar.js:</b> Dahil etmek istediğiniz panelinizin php sayfasında kod bölümü <code class=" language-markup">&lt;body></code> olan kısımın en altına footer alanına ekleyiniz.</p>
+                            <p><b>fonksiyonlar.js:</b> Bu js dosyası güncel Jquery kütüphanesi baz alınarak oluşturmuştur. Lütfen son sürüm bir jquery kütüphanesi kullandığınıza emin olun.</p>
+                            <p><code class=" language-markup"><pre>&lt;script type="text/javascript" src="fonksiyonlar.js">&lt;/script></pre></code></p>
+
+
+                            <p><b>baglan.php:</b> bu scriptin veritabanı seçiminde kolaylık olması için eklenmiş rastgele veritabanı adı bulma dosyasıdır. Şu şekilde eklenir;<code class=" language-markup"><pre> <strong>&lt;?</strong><b>php</b> include "baglan.php";<STRONG> ?></STRONG> </pre></code> Bu dosya <code class=" language-markup">tabloisle.php</code> sayfasında session kontrolü ile rastgele bir veritabanı tanımlanmışsa listeleme işlemi yapar.</p>
+                            <p><b>baglan.php Script dışında kullanım için gerek duyulmaz,</b> benzer bir veritabanı bilgileri girme alanı <code class=" language-markup">tabloisle.php</code> dosyasında bulunmaktadır. 15 ile 18. satırlar.</p>
+
+
+
+                            <hr class="my-5">
+                            <h1 id="kurulum" class="mb-2 mt-3">Kurulum</h1>
+
+                            <div class="alert alert-primary d-flex justify-content-start align-items-center" role="alert"> <span class="fa fa-info mr-4"></span>
+                                <p class="m-0"> Kurulum ve test esnasında oluşabilecek hata ver sorunlar için lütfen bilgisayarınızın yerel sunucusunu (localhost) kullanınız.</p>
+                            </div>
+                            <ol>
+                                <li><p>İndirdiğiniz script içerisinde bulunan tabloisle.php ve fonksiyonar.js adlı iki dosyayı kullanmak istediğiniz script klasörünün temel dizinine kopyalayınız.</p></li>
+                                <li><p>Kullandığınız kod editörünüzü açarak eklemek istediğiniz php sayfanın üst tarafına tabloisle.php dosyasını include ediniz.</p></li>
+                                <li><p>Örnek;</p>
+                                    <p><code class=" language-markup"><pre> <strong>&lt;?</strong><b>php</b> include "tabloisle.php";<STRONG> ?></STRONG> </pre></code></p></li>
+<li><p>Daha sonra fonksiyonlar.js dosyasını kullanmak istediğniz sayfanın footer bölümüne (js dosyalarının sitenize çağırıldığı nokta) ekleyiniz.</p></li>
+<li><p>Örnek;</p></li>
+<li><p><code class=" language-markup"><pre>&lt;script type="text/javascript" src="fonksiyonlar.js">&lt;/script></pre></code></p></li>
+<li><p>Kullandığınız scriptte Tablo kullanıldığı için Datatable eklentinizin olması görüm açısından fayla olacaktır.</p></li>
+<li><p>Tablo pluginlerinin Türkçe eklentisi ve ayarları;<code class=" language-markup"><pre> &lt;script>
+  $(function () {
+   
+   $('table .table').DataTable({
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+      },
+    'paging'      : false,
+    'lengthChange': false,
+    'searching'   : false,
+    'ordering'    : true,
+    'info'        : false,
+    'autoWidth'   : false
+  })
+ })
+&lt;/script> </pre></code></p></li>
+<li><p>Tablo içerinde kullanılan soru işareti style ayarları;<code class=" language-markup"><pre>&lt;style type="text/css">
+table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.soru-anlam{
+  display: none;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  min-height: initial;
+  opacity: .7;
+  outline: 1px solid black;
+  padding: 4px 8px;
+  position: absolute;
+}
+.soru-isaret:hover .soru-anlam{
+  display: block;
+}
+tr td input{
+  max-width: 130px;
+}
+tr td select{
+  max-width: 100px;
+}
+&lt;/style></pre></code></p></li>
+<li><p>Script'te Font Awesome free icon kullanılmaktadır. Dilerseniz indirdiğiniz klasör içerisinden çekebilirsiniz.</p></li>
+<li><p>Scriptin veritabanı bağlantısını yapmak için tabloisle.php dosyasını kod editörünüzle açın;</p></li>
+<li><p>baglan.php sayfası tabloisle.php sayfasına include edilmiş şekilde gelmektedir. baglan.php yardımı olmadan kullanmak istiyorsanız baglan.php adlı alanı silerek 15 ile 17. satırlarda bulunan veritabanı bilgilerini kendi bilgilerinizle değiştirin.</p></li>
+<li><p>Örnek;<img src="img/veritabani_baglanti.jpg"></p></li>
+<li><p>baglan.php olmadan veritabanı bağlantısını kullanırsanız kayıtlı bir session verisi olmadığı için 31. satırda bulunan bağlantı gerçekleşecektir. </p></li>
+<li><p>Sınıfta çalışan ilk fonksiyona (20. satır) gelen parametreler ve değişkenleri tanımlayan baglan.php girdileri 996. satırda bulunmaktadır. <img src="img/sinif_prametre_baglan.JPG"></p></li>
+
+
+                                </ol>
+                            <hr class="my-5">
+                            <h3 id="" class="font-weight-bold mb-2">
+                                Tabloları Listeleme
+                            </h3>
+                            <ol>
+<li><p>Kayıtlı tabloları listelemek için paneliniz <code class="language-markup">&lt;body></code> alanına şu fonksiyonu yazın;</p>
+  <p>  <code class="language-markup"><pre>&lt;div class="box-body"></pre></code></p>
+<p><code class="language-markup"><pre>             
+&lt;?php 
+if (!isset($_GET["listeletablo"]) AND !isset($_GET["sutun_sayi"]) AND !isset($_GET["tabloduzenle"])) {
+  $table->addtable("index.php");
+  $table->tables();
+}
+ ?></pre></code>
+<p><code class="language-markup"><pre>&lt;/div></pre></code></p>
+<p>tables() fonksiyonu ile kayıtlı tabloları listemesini yapabilirsiniz.</p></li>
+<li>
+<p>Yeni Tablo Ekleme formunu oluşturmak için addtable() fonksiyonunu kullanıyoruz. Fonksiyon ile gönderilen index.php prametresi formun action kısmı dinamik yol olarak seçer;
+<code class="language-markup"><pre>  $table->addtable("index.php");</pre></code> <img src="img/tablo_ekle_k.jpg"></p>
+<p>Dinamik action yolu yazdığınız adrese asıl tablo ve sütun isimlerinin oluşturulduğu form şablonu eklemek zorundadır. Aksi takdirde yeni tablo oluşturma formu gözükmeyecektir. Örnek scriptte index.php kullanılmıştır.</p>
+<p>Tabloyu Oluştur butonuna basıldığında index.php sayfasına yönlendirme yapacaktır method GET olarak ayarlanmıştır. <img src="img/tablo_ekle_b.jpg"></p>
+</li>
+
+<li><p>Tablo ekleme formu ekletablo=Tabloyu+Oluştur get ile devreye girer index.php olarak eklediğimiz action yolunu ve formu göstermek için newtable() fonkisyonunu kullanıyoruz;
+<code class="language-markup"><pre>&lt;?php if (isset($_GET["ekletablo"])) {
+  $table->newtable($_GET["tablo_ad"],$table->satir());
+} ?></pre></code>  </p>
+<p>newtable() fonksiyonuna iki adet parametre gider. Bunlardan ilki get ile gelen tablo_ad, ikincisi ise form içerisinde sütun  satırlarını barındıran satir() fonkisyonudur. </p></li>
+
+<li><p>Kayıt edilen veriler, gösterilen veriler ve url kısmında bulunan getleri açıklayan GET okuyucu fonksiyon ile tablo üstünde görüntüleme yapabilirsinz. <img src="img/GET.jpg"></p>
+<p>Bu alanı sayfanızda bulunan section alanına ya da boostrap hiyerarşisinde boşluk bir alan ekleyebilirisiniz; <code class="language-markup"><pre>&lt;?php 
+      
+      $table->get($_GET);
+   ?></pre></code></p>
+<p>Tanımlı GET verilerini olumlu yada olumsuz olarak size gösterir. Form işlemlerinde olumsuz bir sonuçta verileri korumak için geri tuşu bulmaktadır. <img src="img/hata_geri.jpg"></p></li>
+
+<li><p>Kayıtlı bir tablonu verilerini listelemek için gönderilen listeletablo get değerini tableview() fonksiyonu gösterir. Kullanımı; <code class="language-markup"><pre>&lt;?php 
+if (isset($_GET["listeletablo"])) {
+  $table->tableview($_GET["listeletablo"],$table->insertdata($_GET["listeletablo"]));
+  
+}</pre></code></p>
+<p>Fonksiyon içinde iki parametre bulunur, bunlardan ilki get ile gelen tablo adı, ikincisi ise insertdata() yeni veri ekleme formunu barındıran fonkisyondur. Bu fonksiyon içinde forma gelen get değerine göre form yapısını oluşturur. Oluşturulan form gizli bir div içerisinde saklanır.  Veri ekle butonu ile tetiklenen modal içerisine form eklenir ve modal açılır.</p>
+<p>Modal; <code class="language-markup"><pre>&lt;div class="modal fade" id="veri-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  &lt;div class="modal-dialog modal-dialog-centered" role="document">
+    &lt;div class="modal-content">
+      &lt;div class="modal-header">
+        &lt;h5 class="modal-title" id="exampleModalCenterTitle">Veri Yükleme Penceresi&lt;/h5>
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          &lt;span aria-hidden="true">&times;&lt;/span>
+        &lt;/button>
+      &lt;/div>
+      &lt;div class="modal-body">
+        ...
+      &lt;/div>
+      &lt;div class="modal-footer">
+        &lt;button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat&lt;/button>
+
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</pre></code></p>
+<p>Bu modal aynı zamanda düzenleme veri düzenleme metodu için kullanılır.</p></li>
+<li><p>Tablo düzenleme fonksiyonunu çalıştıran kod get ile düzenleme formunu oluşturur, fonksiyon adı edittable() ;<code class="language-markup"><pre>&lt;?php if (isset($_GET["tabloduzenle"])) {
+  $table->edittable($_GET["tabloduzenle"]);
+}?></pre></code></p></li>
+<li><p>Listelenen tablolara yeni sütun eklemek için yeni_satir() fonkisyonunu kullanıyoruz. Bu fonsiyon tablo listesindee bulunan numraları form ile aktive oluyor gelen get değerine göre sütun sayısı forma ekleniyor. Kullanmak için bu kodu yazın;
+<code class="language-markup"><pre>&lt;?php 
+if (isset($_GET["yeni_satir"])) {
+  $table->yeni_satir($table->satir());
+}
+ ?></pre></code></p>
+<p>Burada eklenen satir() fonksiyonu hazır sütun form elementleri eklemek için yapılmıştır.</p></li>
+</ol>
+
+<hr class="my-6">
+
+                            </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <aside class="col-md-3 d-none d-md-block border-left">
+                                <div class="widget widget-support-forum p-md-3 p-sm-2"> <span class="icon icon-forum"></span>
+                                    <h4>İletişime Geçin</h4>
+                                    <p>Herhangi bir sorunda iletişime geçin Github üzerinde güncel kalacaktır.</p> <a href="https://www.bulutasarim.com/iletisim" target="_blank" class="btn btn-light">Support Forum</a> </div>
+                                    <hr class="my-5">
+                                    <ul class="aside-nav nav flex-column">
+                                        <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="https://www.facebook.com/HakkBulutSereme">Facebook</a> </li>
+                                        <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="https://www.twitter.com/HakkBulutSereme">Twitter</a> </li>
+                                        <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="https://www.instagram.com/HakkBulutSereme">Instagram</a> </li>
+                                        <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="https://github.com/hakkbulutsereme/Datatable-Paneli">Github</a> </li>
+                                         <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="mailto:hbsercesme@gmail.com">hbsercesme@gmail.com</a> </li>
+                                        <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="https://www.bulutasarim.com">www.bulutasarim.com</a> </li>
+                                         <li class="nav-item"> <a target="_blank" data-scroll="" class="nav-link text-dark" href="https://www.bulutasarim.com/php/panelden-veritabani-yonetim-sistemi-16">Konu Linki</a> </li>
+                                    </ul>
+                                </aside>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- page-content" -->
+                </div>
+                <!-- page-wrapper -->
+                <!-- using online scripts -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+                </script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+                </script>
+                <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+                <script src="js/prism.min.js"></script>
+                <!-- using local scripts -->
+    <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
